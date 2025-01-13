@@ -4,7 +4,7 @@ inputs:
   extra-flavors:
     description: 'Space separated list of extra flavor extensions'
     default: ''
-  github-pakages-token:
+  github-packages-token:
     description: 'GitHub token to access gems'
     default: ''
   use-bundler:
@@ -18,13 +18,13 @@ runs:
       run: |
         apt-get update -y && apt-get install -y gcc g++ ruby-dev
 
-        if [ "${{ inputs.github-pakages-token }}" != "" ]; then
+        if [ "${{ inputs.github-packages-token }}" != "" ]; then
           curl -L --retry 3 https://raw.githubusercontent.com/metanorma/ci/main/gh-rubygems-setup-action/gen-gemrc-for-gh-packages.sh > gen-gemrc-for-gh-packages.sh
           chmod +x gen-gemrc-for-gh-packages.sh
-          source gen-gemrc-for-gh-packages.sh "${{ inputs.github-pakages-token }}"
+          source gen-gemrc-for-gh-packages.sh "${{ inputs.github-packages-token }}"
           curl -L --retry 3 https://raw.githubusercontent.com/metanorma/ci/main/gh-rubygems-setup-action/gen-bundle-config-for-gh-packages.sh > gen-bundle-config-for-gh-packages.sh
           chmod +x gen-bundle-config-for-gh-packages.sh
-          source gen-bundle-config-for-gh-packages.sh "${{ inputs.github-pakages-token }}" metanorma
+          source gen-bundle-config-for-gh-packages.sh "${{ inputs.github-packages-token }}" metanorma
         fi
 
         for flavor in ${{ inputs.extra-flavors }}; do
@@ -43,7 +43,7 @@ runs:
               gem install fontist
             fi
             fontist update
-            fontist repo setup metanorma https://metanorma-ci:${{ inputs.github-pakages-token }}@github.com/metanorma/fontist-formulas-private
+            fontist repo setup metanorma https://metanorma-ci:${{ inputs.github-packages-token }}@github.com/metanorma/fontist-formulas-private
             fontist repo update metanorma
           fi
         done

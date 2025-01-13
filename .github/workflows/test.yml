@@ -14,7 +14,7 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - run: |
         sudo apt-get install yamllint
@@ -34,10 +34,10 @@ jobs:
         - ribose bsi
         - ribose bsi nist
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - if: contains(matrix.flavors, 'ribose')
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: metanorma/mn-samples-ribose
         path: ribose
@@ -52,7 +52,7 @@ jobs:
     - uses: ./
       with:
         extra-flavors: ${{ matrix.flavors }}
-        github-pakages-token: ${{ secrets.METANORMA_CI_PAT_TOKEN }}
+        github-packages-token: ${{ secrets.METANORMA_CI_PAT_TOKEN }}
 
     - if: contains(matrix.flavors, 'ribose')
       uses: actions-mn/site-gen@main
@@ -82,7 +82,7 @@ jobs:
         - ribose bsi
         - ribose bsi nist
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - uses: ruby/setup-ruby@v1
       with:
@@ -91,7 +91,7 @@ jobs:
     - run: gem install metanorma-cli
 
     - if: contains(matrix.flavors, 'ribose')
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: metanorma/mn-samples-ribose
         path: ribose
@@ -106,7 +106,7 @@ jobs:
     - uses: ./
       with:
         extra-flavors: ${{ matrix.flavors }}
-        github-pakages-token: ${{ secrets.METANORMA_CI_PAT_TOKEN }}
+        github-packages-token: ${{ secrets.METANORMA_CI_PAT_TOKEN }}
         use-bundler: false
 
     - if: contains(matrix.flavors, 'ribose')

@@ -8,17 +8,25 @@ Setup extra flavors that aren't come with default `metanorma` installation, like
 - uses: actions-mn/setup-flavors@main
   with:
     extra-flavors: nist
-    github-pakages-token: ${{ secrets.METANORMA_CI_PAT_TOKEN }}
+    github-packages-token: ${{ secrets.METANORMA_CI_PAT_TOKEN }}
 ```
 
-Or
+Or (to use bundler)
 
 ```yml
 - uses: actions-mn/setup-flavors@main
   with:
-    extra-flavors: nist
-    github-pakages-token: ${{ secrets.METANORMA_CI_PAT_TOKEN }}
+    extra-flavors: bsi
+    github-packages-token: ${{ secrets.METANORMA_CI_PAT_TOKEN }}
     use-bundler: true
+```
+
+Or (for public gems)
+
+```yml
+- uses: actions-mn/setup-flavors@main
+  with:
+    extra-flavors: ribose
 ```
 
 > NOTE: this action only works for metanorma from ruby-gems
